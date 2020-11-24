@@ -1,13 +1,15 @@
-import './usercard.scss';
+import React from 'react';
 
-import { Card, Image, Row, Col } from "react-bootstrap";
-
-import img from '../img/user1.png';
+import { Card, Image } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag, faCity } from '@fortawesome/free-solid-svg-icons';
 
+import './usercard.scss';
 
-const UserCard = (props) => (
+import img from '../../statics/img/user1.png';
+
+
+const UserCard = () => (
     <Card className="user-card p-3">
         <div className="inner-shadow"></div>
         <div className="flex d-flex">

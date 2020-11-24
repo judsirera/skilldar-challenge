@@ -1,13 +1,12 @@
-
+import React from 'react';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-
-import "./topbar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faHashtag, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 
+import "./topbar.scss";
 
 
 function TopBar() {

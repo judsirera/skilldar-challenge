@@ -1,8 +1,12 @@
+import React from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Row, Col, Image, InputGroup, FormControl } from "react-bootstrap";
 
-import logo from '../img/skilldar.png';
+import logo from '../../statics/img/skilldar.png';
+
+import './searchbar.scss';
 
 
 const SearchBar = () => (
@@ -11,7 +15,7 @@ const SearchBar = () => (
             <Image src={logo} fluid></Image>
         </Col>
         <Col xs={12} md={7}>
-            <InputGroup >
+            <InputGroup className="search-bar">
                 <FormControl
                     placeholder="Search"
                 />

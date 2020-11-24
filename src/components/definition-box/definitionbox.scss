@@ -1,5 +1,5 @@
 
-@import '../colors.scss';
+@import '../../scss/index';
 
 .description {
     font-size: 14px;
@@ -9,7 +9,7 @@
 .title {
     color:$light-gray;
     margin-top: -10px;
-    background: $gray;
+    background: $background-gray;
     position: absolute;
     top: 0;
 }

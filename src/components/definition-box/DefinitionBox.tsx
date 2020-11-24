@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './definitionbox.scss';
 
 const DefinitionBox = () => (
