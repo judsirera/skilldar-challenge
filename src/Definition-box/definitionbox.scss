@@ -1,0 +1,15 @@
+
+@import '../colors.scss';
+
+.description {
+    font-size: 14px;
+    color: $red;
+}
+
+.title {
+    color:$light-gray;
+    margin-top: -10px;
+    background: $gray;
+    position: absolute;
+    top: 0;
+}

@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { Container } from 'react-bootstrap';
+import './App.scss';
+import TopBar from './Top-bar/TopBar';
+import UserCard from './User-card/UserCard'
+import SearchBar from './Search-bar/SearchBar'
+import DefinitionBox from './Definition-box/DefinitionBox';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <TopBar />
+      <Container className="my-5 w-75 mx-auto" >
+        <SearchBar />
+        <DefinitionBox className="mt-3" />
+        <UserCard />
+      </Container>
+    </>
+
   );
 }
 

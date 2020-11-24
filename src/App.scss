@@ -1,0 +1,10 @@
+
+@import "colors";
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: $background-gray;
+  color: $white;
+  font-style: normal;
+}
