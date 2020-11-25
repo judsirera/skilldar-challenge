@@ -6,37 +6,48 @@ import { faHashtag, faCity } from '@fortawesome/free-solid-svg-icons';
 
 import './usercard.scss';
 
-import img from '../../statics/img/user1.png';
+import { User } from '../../models/User';
 
+interface Params {
+    user: User;
+}
 
-const UserCard = () => (
-    <Card className="user-card p-3">
-        <div className="inner-shadow"></div>
-        <div className="flex d-flex">
-            <Image src={img} className="profile-img" rounded></Image>
-            <Card.Body className="py-0 pr-4 flex d-flex flex-column justify-content-between">
-                <div className="flex d-flex">
-                    <div className="mr-4">
-                        <Card.Title className="text-uppercase">Card title</Card.Title>
-                        <Card.Text className="introduction">
-                            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                    </Card.Text>
-                    </div>
-                    <div className="align-self-center justify-content-between flex d-flex align-items-center">
-                        <div>
-                            <div className="rectangle blue"></div>
-                            <div className="rectangle red"></div>
+const UserCard = (props: Params) => {
+    const { user } = props;
+
+    const componentWillMout = () => {
+        console.log("will mount");
+    }
+
+    return (
+        <Card className="user-card p-3">
+            <div className="inner-shadow"></div>
+            <div className="flex d-flex">
+                <Image src={user.avatar} className="profile-img" rounded></Image>
+                <Card.Body className="py-0 pr-4 flex d-flex flex-column justify-content-between">
+                    <div className="flex d-flex">
+                        <div className="mr-auto">
+                            <Card.Title className="text-uppercase">{user.fullName}</Card.Title>
+                            <Card.Text className="introduction">
+                                {user.introduction}
+                            </Card.Text>
                         </div>
-                        <div className="ml-2">456</div>
+                        <div className="align-self-center justify-content-between flex d-flex align-items-center">
+                            <div>
+                                <div className="rectangle blue"></div>
+                                <div className="rectangle red"></div>
+                            </div>
+                            <div className="ml-2">{user.value}</div>
+                        </div>
                     </div>
-                </div>
-                <div className="flex d-flex justify-content-between align-items-center">
-                    <div><p><FontAwesomeIcon icon={faHashtag} color="red" /> keywords</p></div>
-                    <div><p><FontAwesomeIcon icon={faCity} /> city</p></div>
-                </div>
-            </Card.Body>
-        </div>
-    </Card>
-)
+                    <div className="flex d-flex justify-content-between align-items-center">
+                        <div><p><FontAwesomeIcon icon={faHashtag} color="red" /> {user.keywords.toString()}</p></div>
+                        <div><p><FontAwesomeIcon icon={faCity} /> {user.location}</p></div>
+                    </div>
+                </Card.Body>
+            </div>
+        </Card>
+    );
+}
 
 export default UserCard;

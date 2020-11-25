@@ -1,12 +1,13 @@
 export class User {
-    public avatar: string | undefined;
-    public email: string | undefined;
-    public firstName: string | undefined;
-    public fullName: string | undefined;
-    public lastName: string | undefined;
-    public value: number | undefined;
-    public location: string | undefined;
-    public keywords: string[] | undefined;
+    public avatar: string = "";
+    public email: string = "";
+    public firstName: string = "";
+    public fullName: string = "";
+    public lastName: string = "";
+    public introduction: string = "";
+    public value: number = 0;
+    public location: string = "";
+    public keywords: string[] = [];
 
     constructor(data: any) {
         if (!data) return;
@@ -14,9 +15,12 @@ export class User {
         this.email = data['email'];
         this.firstName = data['first_name'];
         this.lastName = data['last_name'];
-        this.fullName = this.firstName + ' ' + this.lastName;
+        this.fullName = data['first_name'] + ' ' + data['last_name'];
+        this.introduction = data['introduction'];
         this.value = data['value'];
         this.location = data['location'];
         this.keywords = data['keywords'];
+
+        console.log(this);
     }
 }
