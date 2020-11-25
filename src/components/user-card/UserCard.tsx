@@ -12,18 +12,17 @@ interface Params {
     user: User;
 }
 
+const requestImageFile = require.context('../../statics/img', true, /.png$/);
+
 const UserCard = (props: Params) => {
     const { user } = props;
-
-    const componentWillMout = () => {
-        console.log("will mount");
-    }
+    const avatar = require(`../../statics/img/${user.avatar}`);
 
     return (
         <Card className="user-card p-3">
             <div className="inner-shadow"></div>
             <div className="flex d-flex">
-                <Image src={user.avatar} className="profile-img" rounded></Image>
+                <Image src={requestImageFile(`./${user.avatar}`).default} className="profile-img" rounded></Image>
                 <Card.Body className="py-0 pr-4 flex d-flex flex-column justify-content-between">
                     <div className="flex d-flex">
                         <div className="mr-auto">

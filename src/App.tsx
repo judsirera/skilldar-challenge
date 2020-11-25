@@ -11,7 +11,7 @@ import { User } from './models/User';
 
 const App = () => {
   const users = [new User({
-    avatar: "./statics/img/user1.png",
+    avatar: "user1.png",
     email: "user1@gmail.com",
     first_name: "User",
     last_name: "One",
@@ -20,7 +20,7 @@ const App = () => {
     location: "Germany",
     keywords: "hello, user, challenge"
   }), new User({
-    avatar: "./statics/img/user2.png",
+    avatar: "user2.png",
     email: "user2@gmail.com",
     first_name: "User",
     last_name: "Two",
@@ -29,7 +29,7 @@ const App = () => {
     location: "London",
     keywords: "hello, user, challenge"
   }), new User({
-    avatar: "./statics/img/user3.png",
+    avatar: "user3.png",
     email: "user3@gmail.com",
     first_name: "User",
     last_name: "Three",
