@@ -10,7 +10,7 @@ const UserList = (props: Params) => {
     const { users } = props;
 
     const listUser = users.map((user: User, index: any) => (
-        <div className="my-4" key={index}>
+        <div className="mb-4" key={index}>
             <UserCard user={user}></UserCard>
         </div>
 

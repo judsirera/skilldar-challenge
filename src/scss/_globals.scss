@@ -3,3 +3,18 @@ body {
   color: $white;
   font-style: normal;
 }
+
+
+h6 {
+    color: $light-gray;
+}
+
+.btn-primary {
+    background-color: $dark-gray;
+    border: 0;
+
+    &:hover, &:active, &:focus {
+      background-color: change-color($color:$dark-gray, $alpha: 0.5) !important;
+      outline: 0 !important;
+    }
+}

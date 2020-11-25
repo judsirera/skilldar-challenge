@@ -10,7 +10,7 @@ import './searchbar.scss';
 
 
 const SearchBar = () => (
-    <Row className="justify-content-between align-items-center">
+    <Row className="justify-content-between align-items-center" noGutters={true}>
         <Col xs={12} md={3} className="mb-3 mb-md-0">
             <Image src={logo} fluid></Image>
         </Col>

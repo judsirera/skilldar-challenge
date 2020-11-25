@@ -21,6 +21,5 @@ export class User {
         this.location = data['location'];
         this.keywords = data['keywords'];
 
-        console.log(this);
     }
 }
