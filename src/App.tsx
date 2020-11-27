@@ -7,11 +7,13 @@ import SearchBar from './components/search-bar/SearchBar'
 import DefinitionBox from './components/definition-box/DefinitionBox';
 import FilterMenu from './components/filter-menu/FilterMenu';
 import RelatedSearch from './components/related-search/RelatedSearch';
+import Pagination from './components/pagination/Pagination';
 import Footer from './components/footer/Footer'
 
 
 import './scss/main.scss';
 import users from './data/users';
+
 
 
 const App = () => {
@@ -37,6 +39,13 @@ const App = () => {
           <FilterMenu locations={['london', 'berlin', 'barcelona']} />
         </Col>
       </Row>
+
+      <Row noGutters={true}>
+        <Col xs={10} md={6} className="mx-auto">
+          <Pagination />
+        </Col>
+      </Row>
+
 
       <Footer />
     </>
