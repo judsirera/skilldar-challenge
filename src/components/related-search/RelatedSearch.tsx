@@ -15,7 +15,7 @@ const RelatedSearch = (props: Params) => {
             <div className="text-center">
                 <h6 className="text-uppercase mb-3">Related Searches</h6>
                 {terms.map((term: string, index: any) => (
-                    <p key={index} className="mb-1 items"><FontAwesomeIcon icon={faHashtag} /> {term}</p>
+                    <p className="mb-1" key={index} ><a href="" className="items red"><FontAwesomeIcon icon={faHashtag} /> {term}</a></p>
                 ))}
             </div>
         </div>

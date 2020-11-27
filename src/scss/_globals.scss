@@ -18,3 +18,31 @@ h6 {
       outline: 0 !important;
     }
 }
+
+.nav {
+  background-color: $super-dark-gray;
+}
+
+.bottom-shadow {
+    box-shadow: 0px 5px 0px 0px rgba(0,0,0,0.4);
+}
+
+.top-shadow {
+  box-shadow: 0px -5px 0px 0px rgba(0,0,0,0.4);
+}
+
+.yellow {
+  color: $yellow !important;
+}
+
+.red {
+  color: $red !important;
+}
+
+.green{
+  color: $green !important;
+}
+
+.blue {
+  color: $blue !important;
+}

@@ -4,8 +4,8 @@ import { User } from '../models/User';
 const users = [new User({
     avatar: "user1.png",
     email: "user1@gmail.com",
-    first_name: "User",
-    last_name: "One",
+    first_name: "James",
+    last_name: "Hawlo",
     introduction: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.I’ve worked with many professional film teams.",
     value: 435,
     location: "Germany",

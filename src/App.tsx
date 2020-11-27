@@ -7,6 +7,7 @@ import SearchBar from './components/search-bar/SearchBar'
 import DefinitionBox from './components/definition-box/DefinitionBox';
 import FilterMenu from './components/filter-menu/FilterMenu';
 import RelatedSearch from './components/related-search/RelatedSearch';
+import Footer from './components/footer/Footer'
 
 
 import './scss/main.scss';
@@ -19,7 +20,7 @@ const App = () => {
     <>
       <TopBar />
 
-      <Row className="my-2 mt-5 my-md-5" noGutters={true}>
+      <Row className="my-2 my-md-5" noGutters={true}>
         <Col xs={10} md={6} className="mx-auto">
           <SearchBar />
           <DefinitionBox />
@@ -36,6 +37,8 @@ const App = () => {
           <FilterMenu locations={['london', 'berlin', 'barcelona']} />
         </Col>
       </Row>
+
+      <Footer />
     </>
 
   );
