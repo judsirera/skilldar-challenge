@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Row, Col } from 'react-bootstrap';
 import TopBar from './../components/top-bar/TopBar';
@@ -11,97 +12,75 @@ import Pagination from './../components/pagination/Pagination';
 import Footer from './../components/footer/Footer'
 
 import users from './../data/users';
-import { User } from '../models/User';
 
 
-interface State {
-    locations: string[],
-    searchResults: User[],
-    pagination: {
-        total: number,
-        active: number
-    }
-}
 
-class Search extends React.Component<any, State> {
-    usersPerPage: number = 5;
+const Search = () => {
+    const [locations] = useState(Array.from(new Set(users.map(user => user.location))));
+    const [searchResults, setSearchResults] = useState(users);
+    const [pagination, setPagination] = useState({ total: 0, active: 1 });
+    const [searchParams, setSearchParams] = useState({ qs: "", filterByLocation: "All" });
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            locations: Array.from(new Set(users.map(user => user.location))),
-            searchResults: users,
-            pagination: {
-                total: Math.ceil(users.length / this.usersPerPage),
-                active: 1
-            }
-        }
-        this.handleSearch = this.handleSearch.bind(this);
-        this.handleFilter = this.handleFilter.bind(this);
-        this.updateState = this.updateState.bind(this);
+
+    const useURLQuery = () => new URLSearchParams(useLocation().search);
+    let filterLocation: any = useURLQuery().get("location");
+    if (!filterLocation) filterLocation = "All";
+
+    const handleSearch = (query: string) => {
+        setSearchParams({ qs: query, filterByLocation: searchParams.filterByLocation });
+        updateResults({ qs: query, filterByLocation: searchParams.filterByLocation });
     }
 
-    handleSearch(searchValue: string) {
+    const handleFilterByLocation = (location: string) => {
+        setSearchParams({ qs: searchParams.qs, filterByLocation: location });
+        updateResults({ qs: searchParams.qs, filterByLocation: location });
+    }
+
+    const handlePagination = (page: number) => {
+        console.log(page);
+
+    }
+
+    const updateResults = ({ qs, filterByLocation }: { qs: String, filterByLocation: String }) => {
         let results = users;
-        if (searchValue !== "") {
-            results = users.filter(user => user.fullName.toUpperCase().includes(searchValue.toUpperCase()));
+        if (qs !== "") {
+            results = users.filter(user => user.fullName.toUpperCase().includes(qs.toUpperCase()));
         }
-
-        this.updateState(results);
-    }
-
-    handleFilter(locationFilter: string) {
-        let results = users;
-        if (locationFilter !== "All") {
-            results = users.filter(user => user.location === locationFilter);
+        if (filterByLocation !== "All") {
+            results = results.filter(user => user.location === filterByLocation);
         }
-        this.updateState(results);
-
+        setSearchResults(results);
     }
 
-    updateState(results: User[]) {
-        this.setState({
-            searchResults: results,
-            pagination: {
-                total: Math.ceil(results.length / this.usersPerPage),
-                active: 1
-            }
-        })
-    }
+    return (
+        <>
+            <TopBar />
+            <Row className="my-2 my-md-5" noGutters={true}>
+                <Col xs={10} md={6} className="mx-auto">
+                    <SearchBar onSearch={handleSearch} />
+                    <DefinitionBox />
+                </Col>
+            </Row>
+            <Row noGutters={true}>
+                <Col xs={6} md={3} className="pr-md-4">
+                    <RelatedSearch terms={['term1', 'term2', 'term3']} />
+                </Col>
+                <Col xs={{ span: 10, order: 'last' }} md={6} className="mx-auto mx-md-0 mt-3 mt-md-0">
+                    <UserList users={searchResults} />
+                </Col>
+                <Col xs={{ span: 6, order: 2 }} md={{ span: 3, order: 'last' }} className="pl-md-4">
+                    <FilterMenu locations={['All', ...locations]} active={filterLocation} onFilter={handleFilterByLocation} />
+                </Col>
+            </Row>
+            <Row noGutters={true}>
+                <Col xs={10} md={6} className="mx-auto">
+                    <Pagination active={pagination.active} total={pagination.total} />
+                </Col>
+            </Row>
 
-    render() {
-        const { searchResults, locations, pagination } = this.state;
-        return (
-            <>
-                <TopBar />
-                <Row className="my-2 my-md-5" noGutters={true}>
-                    <Col xs={10} md={6} className="mx-auto">
-                        <SearchBar onSearch={this.handleSearch} />
-                        <DefinitionBox />
-                    </Col>
-                </Row>
-                <Row noGutters={true}>
-                    <Col xs={6} md={3} className="pr-md-4">
-                        <RelatedSearch terms={['term1', 'term2', 'term3']} />
-                    </Col>
-                    <Col xs={{ span: 10, order: 'last' }} md={6} className="mx-auto mx-md-0 mt-3 mt-md-0">
-                        <UserList users={searchResults} />
-                    </Col>
-                    <Col xs={{ span: 6, order: 2 }} md={{ span: 3, order: 'last' }} className="pl-md-4">
-                        <FilterMenu locations={['All', ...locations]} onFilter={this.handleFilter} />
-                    </Col>
-                </Row>
-
-                <Row noGutters={true}>
-                    <Col xs={10} md={6} className="mx-auto">
-                        <Pagination active={pagination.active} total={pagination.total} />
-                    </Col>
-                </Row>
-
-                <Footer />
-            </>
-        )
-    }
+            <Footer />
+        </>
+    )
 }
 
 export default Search;

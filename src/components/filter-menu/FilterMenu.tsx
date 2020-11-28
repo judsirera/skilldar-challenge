@@ -6,14 +6,12 @@ import { DropdownButton } from "react-bootstrap";
 
 interface Params {
     locations: string[];
+    active: string;
     onFilter: any;
 }
 
 const FilterMenu = (props: Params) => {
-    const { locations, onFilter } = props;
-
-    const useQuery = () => new URLSearchParams(useLocation().search);
-    const active = useQuery().get("location")?.toString();
+    const { locations, active, onFilter } = props;
 
     const handleClick = (event: any) => {
         onFilter(event.target.innerText);
