@@ -8,24 +8,27 @@ import logo from '../../statics/img/skilldar.png';
 
 import './searchbar.scss';
 
+const SearchBar = (props: any) => {
+    const handleChange = (event: any) => {
+        props.onSearch(event.target.value);
+    }
 
-const SearchBar = () => (
-    <Row className="justify-content-between align-items-center" noGutters={true}>
-        <Col xs={12} md={3} className="mb-3 mb-md-0">
-            <Image src={logo} fluid></Image>
-        </Col>
-        <Col xs={12} md={7}>
-            <InputGroup className="search-bar">
-                <FormControl
-                    placeholder="Search"
-                />
-                <InputGroup.Append>
-                    <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
-                </InputGroup.Append>
-            </InputGroup>
-        </Col>
-    </Row>
-)
+    return (
+        <Row className="justify-content-between align-items-center" noGutters={true}>
+            <Col xs={12} md={3} className="mb-3 mb-md-0">
+                <Image src={logo} fluid></Image>
+            </Col>
+            <Col xs={12} md={7}>
+                <InputGroup className="search-bar">
+                    <FormControl placeholder="Search" onChange={handleChange} />
+                    <InputGroup.Append>
+                        <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
+                    </InputGroup.Append>
+                </InputGroup>
+            </Col>
+        </Row>
+    )
+}
 
 
 export default SearchBar;
