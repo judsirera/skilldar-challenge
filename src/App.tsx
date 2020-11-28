@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import './scss/main.scss';
 import Search from './pages/Search';
@@ -8,8 +9,9 @@ import Search from './pages/Search';
 const App = () => {
 
   return (
-    <Search />
-
+    <Router>
+      <Search />
+    </Router>
   );
 }
 

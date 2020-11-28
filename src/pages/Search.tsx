@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Row, Col } from 'react-bootstrap';
 import TopBar from './../components/top-bar/TopBar';
 import UserList from './../components/user-list/UserList'
@@ -11,6 +12,7 @@ import Footer from './../components/footer/Footer'
 
 import users from './../data/users';
 import { User } from '../models/User';
+
 
 interface State {
     locations: string[],
@@ -34,8 +36,9 @@ class Search extends React.Component<any, State> {
                 active: 1
             }
         }
-
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
+        this.updateState = this.updateState.bind(this);
     }
 
     handleSearch(searchValue: string) {
@@ -44,16 +47,26 @@ class Search extends React.Component<any, State> {
             results = users.filter(user => user.fullName.toUpperCase().includes(searchValue.toUpperCase()));
         }
 
+        this.updateState(results);
+    }
+
+    handleFilter(locationFilter: string) {
+        let results = users;
+        if (locationFilter !== "All") {
+            results = users.filter(user => user.location === locationFilter);
+        }
+        this.updateState(results);
+
+    }
+
+    updateState(results: User[]) {
         this.setState({
             searchResults: results,
-            locations: Array.from(new Set(results.map(user => user.location))),
             pagination: {
                 total: Math.ceil(results.length / this.usersPerPage),
                 active: 1
             }
         })
-
-        console.log(this.state);
     }
 
     render() {
@@ -75,7 +88,7 @@ class Search extends React.Component<any, State> {
                         <UserList users={searchResults} />
                     </Col>
                     <Col xs={{ span: 6, order: 2 }} md={{ span: 3, order: 'last' }} className="pl-md-4">
-                        <FilterMenu locations={['All', ...locations]} />
+                        <FilterMenu locations={['All', ...locations]} onFilter={this.handleFilter} />
                     </Col>
                 </Row>
 

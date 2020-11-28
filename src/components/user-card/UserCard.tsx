@@ -16,7 +16,6 @@ const requestImageFile = require.context('../../statics/img', true, /.png$/);
 
 const UserCard = (props: Params) => {
     const { user } = props;
-    const avatar = require(`../../statics/img/${user.avatar}`);
 
     return (
         <Card className="user-card p-3">
