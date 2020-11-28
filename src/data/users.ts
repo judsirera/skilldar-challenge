@@ -1,4 +1,3 @@
-import React from 'react';
 import { User } from '../models/User';
 
 const users = [new User({
