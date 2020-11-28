@@ -14,15 +14,25 @@ import { User } from '../models/User';
 
 interface State {
     locations: string[],
-    searchResults: User[]
+    searchResults: User[],
+    pagination: {
+        total: number,
+        active: number
+    }
 }
 
 class Search extends React.Component<any, State> {
+    usersPerPage: number = 5;
+
     constructor(props: any) {
         super(props);
         this.state = {
             locations: Array.from(new Set(users.map(user => user.location))),
-            searchResults: users
+            searchResults: users,
+            pagination: {
+                total: Math.ceil(users.length / this.usersPerPage),
+                active: 1
+            }
         }
 
         this.handleSearch = this.handleSearch.bind(this);
@@ -37,11 +47,17 @@ class Search extends React.Component<any, State> {
         this.setState({
             searchResults: results,
             locations: Array.from(new Set(results.map(user => user.location))),
+            pagination: {
+                total: Math.ceil(results.length / this.usersPerPage),
+                active: 1
+            }
         })
+
+        console.log(this.state);
     }
 
     render() {
-        const { searchResults, locations } = this.state;
+        const { searchResults, locations, pagination } = this.state;
         return (
             <>
                 <TopBar />
@@ -65,7 +81,7 @@ class Search extends React.Component<any, State> {
 
                 <Row noGutters={true}>
                     <Col xs={10} md={6} className="mx-auto">
-                        <Pagination active={1} total={3} />
+                        <Pagination active={pagination.active} total={pagination.total} />
                     </Col>
                 </Row>
 
