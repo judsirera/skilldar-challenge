@@ -4,7 +4,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 const Footer = () => {
 
     return (
-        <Navbar className="nav top-shadow mt-5" variant="dark">
+        <Navbar className="nav top-shadow footer" variant="dark">
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav>
                     <Nav.Link href="#">Terms</Nav.Link>

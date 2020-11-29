@@ -61,31 +61,35 @@ const Search = () => {
 
     return (
         <>
-            <TopBar />
-            <Row className="my-2 my-md-5" noGutters={true}>
-                <Col xs={10} md={6} className="mx-auto">
-                    <SearchBar onSearch={handleSearch} />
-                    <DefinitionBox />
-                </Col>
-            </Row>
-            <Row noGutters={true}>
-                <Col xs={6} md={3} className="pr-md-4">
-                    <RelatedSearch terms={['term1', 'term2', 'term3']} />
-                </Col>
-                <Col xs={{ span: 10, order: 'last' }} md={6} className="mx-auto mx-md-0 mt-3 mt-md-0">
-                    <UserList users={filter(searchParams)} />
-                </Col>
-                <Col xs={{ span: 6, order: 2 }} md={{ span: 3, order: 'last' }} className="pl-md-4">
-                    <FilterMenu locations={['All', ...locations]} active={filterLocation} onFilter={handleFilterByLocation} />
-                </Col>
-            </Row>
-            <Row noGutters={true}>
-                <Col xs={10} md={6} className="mx-auto">
-                    <Pagination active={currentPage} total={Math.ceil(results.length / RESULTS_PER_PAGE)} handlePagination={handlePagination} />
-                </Col>
-            </Row>
+            <div className="wrapper">
+                <TopBar />
 
+                <Row className="my-2 my-md-5" noGutters={true}>
+                    <Col xs={10} md={6} className="mx-auto">
+                        <SearchBar onSearch={handleSearch} />
+                        <DefinitionBox />
+                    </Col>
+                </Row>
+                <Row noGutters={true}>
+                    <Col xs={6} md={3} className="pr-md-4">
+                        <RelatedSearch terms={['term1', 'term2', 'term3']} />
+                    </Col>
+                    <Col xs={{ span: 10, order: 'last' }} md={6} className="mx-auto mx-md-0 mt-3 mt-md-0">
+                        <UserList users={filter(searchParams)} />
+                    </Col>
+                    <Col xs={{ span: 6, order: 2 }} md={{ span: 3, order: 'last' }} className="pl-md-4">
+                        <FilterMenu locations={['All', ...locations]} active={filterLocation} onFilter={handleFilterByLocation} />
+                    </Col>
+                </Row>
+                <Row noGutters={true} className="mb-5">
+                    <Col xs={10} md={6} className="mx-auto">
+                        <Pagination active={currentPage} total={Math.ceil(results.length / RESULTS_PER_PAGE)} handlePagination={handlePagination} />
+                    </Col>
+                </Row>
+                <div className="push"></div>
+            </div>
             <Footer />
+
         </>
     )
 }
