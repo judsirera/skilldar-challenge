@@ -24,7 +24,7 @@ const FilterMenu = (props: Params) => {
                 <DropdownButton id="dropdown-basic-button" title="Locations" className="w-100">
                     {locations.map((location: string, index: any) => (
                         <Link
-                            to={{ pathname: '/search/1', search: `?location=${location}` }}
+                            to={{ pathname: '/search', search: `?location=${location}&page=1` }}
                             key={index}
                             className={`dropdown-item ${active === location ? 'active' : ''}`}
                             onClick={handleClick}>{location}</Link>

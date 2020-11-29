@@ -17,7 +17,7 @@ const Pagination = (props: Params) => {
 
     let searchQuery = "?"
     useURLQuery.forEach((value, key) => {
-        searchQuery += (key + "=" + value);
+        if (key !== "page") searchQuery += (key + "=" + value + "&");
     });
 
 
@@ -32,7 +32,7 @@ const Pagination = (props: Params) => {
         if (value > 0 && value <= total) {
             items.push(
                 <li className={`page-item ${value === active && 'active'}`} key={value}>
-                    <Link to={{ pathname: `/search/${value}`, search: searchQuery }}
+                    <Link to={{ pathname: "/search", search: `${searchQuery}page=${value}` }}
                         className="page-link"
                         onClick={() => handleClick(value)}>{value}
                     </Link>
@@ -42,14 +42,14 @@ const Pagination = (props: Params) => {
     }
 
     const next = <li className={`page-item ${active === total && 'disabled'}`}>
-        <Link to={{ pathname: `/search/${active + 1}`, search: searchQuery }}
+        <Link to={{ pathname: "/search", search: `${searchQuery}page=${active + 1}` }}
             className="page-link"
             onClick={() => handleClick(active + 1)}><FontAwesomeIcon icon={faAngleRight} />
         </Link>
     </li>
 
     const prev = <li className={`page-item ${active === 1 && 'disabled'}`}>
-        <Link to={{ pathname: `/search/${active - 1}`, search: searchQuery }}
+        <Link to={{ pathname: "/search", search: `${searchQuery}page=${active - 1}` }}
             className="page-link"
             onClick={() => handleClick(active - 1)}><FontAwesomeIcon icon={faAngleLeft} />
         </Link>
