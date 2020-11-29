@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { Row, Col } from 'react-bootstrap';
 import TopBar from './../components/top-bar/TopBar';
@@ -13,43 +13,51 @@ import Footer from './../components/footer/Footer'
 
 import users from './../data/users';
 
+const RESULTS_PER_PAGE = 5;
 
+interface myParams {
+    page: string;
+};
 
 const Search = () => {
+
+    const useURLQuery = new URLSearchParams(useLocation().search);
+    let filterLocation: any = useURLQuery.has("location") ? useURLQuery.get("location") : "All";
+
+    const params: myParams = useParams();
+    let page: number = params.page ? parseInt(params.page) : 1;
+
     const [locations] = useState(Array.from(new Set(users.map(user => user.location))));
-    const [searchResults, setSearchResults] = useState(users);
-    const [pagination, setPagination] = useState({ total: 0, active: 1 });
-    const [searchParams, setSearchParams] = useState({ qs: "", filterByLocation: "All" });
+    const [currentPage, setCurrentPage] = useState(page);
+    const [searchParams, setSearchParams] = useState({ qs: "", filterByLocation: filterLocation });
 
-
-    const useURLQuery = () => new URLSearchParams(useLocation().search);
-    let filterLocation: any = useURLQuery().get("location");
-    if (!filterLocation) filterLocation = "All";
 
     const handleSearch = (query: string) => {
         setSearchParams({ qs: query, filterByLocation: searchParams.filterByLocation });
-        updateResults({ qs: query, filterByLocation: searchParams.filterByLocation });
+        setCurrentPage(1);
     }
 
     const handleFilterByLocation = (location: string) => {
         setSearchParams({ qs: searchParams.qs, filterByLocation: location });
-        updateResults({ qs: searchParams.qs, filterByLocation: location });
+        setCurrentPage(1);
     }
 
     const handlePagination = (page: number) => {
-        console.log(page);
-
+        setCurrentPage(page);
     }
 
-    const updateResults = ({ qs, filterByLocation }: { qs: String, filterByLocation: String }) => {
-        let results = users;
+    let results = users;
+    const filter = ({ qs, filterByLocation }: { qs: String, filterByLocation: String }) => {
         if (qs !== "") {
             results = users.filter(user => user.fullName.toUpperCase().includes(qs.toUpperCase()));
         }
         if (filterByLocation !== "All") {
             results = results.filter(user => user.location === filterByLocation);
         }
-        setSearchResults(results);
+
+        const from = (currentPage - 1) * RESULTS_PER_PAGE;
+        const to = currentPage * RESULTS_PER_PAGE
+        return results.slice(from, to);
     }
 
     return (
@@ -66,7 +74,7 @@ const Search = () => {
                     <RelatedSearch terms={['term1', 'term2', 'term3']} />
                 </Col>
                 <Col xs={{ span: 10, order: 'last' }} md={6} className="mx-auto mx-md-0 mt-3 mt-md-0">
-                    <UserList users={searchResults} />
+                    <UserList users={filter(searchParams)} />
                 </Col>
                 <Col xs={{ span: 6, order: 2 }} md={{ span: 3, order: 'last' }} className="pl-md-4">
                     <FilterMenu locations={['All', ...locations]} active={filterLocation} onFilter={handleFilterByLocation} />
@@ -74,7 +82,7 @@ const Search = () => {
             </Row>
             <Row noGutters={true}>
                 <Col xs={10} md={6} className="mx-auto">
-                    <Pagination active={pagination.active} total={pagination.total} />
+                    <Pagination active={currentPage} total={Math.ceil(results.length / RESULTS_PER_PAGE)} handlePagination={handlePagination} />
                 </Col>
             </Row>
 
