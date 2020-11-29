@@ -7,7 +7,7 @@ const users = [new User({
     last_name: "Hawlo",
     introduction: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.I’ve worked with many professional film teams.",
     value: 435,
-    location: "Germany",
+    location: "Berlin",
     keywords: "hello, user, challenge"
 }), new User({
     avatar: "user2.png",

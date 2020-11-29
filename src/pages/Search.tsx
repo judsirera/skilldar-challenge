@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Row, Col } from 'react-bootstrap';
 import TopBar from './../components/top-bar/TopBar';
@@ -23,11 +23,8 @@ const Search = () => {
 
     const useURLQuery = new URLSearchParams(useLocation().search);
     let filterLocation: any = useURLQuery.has("location") ? useURLQuery.get("location") : "All";
-    let page: any = useURLQuery.has("page") ? useURLQuery.get("page") : 1;
-    page = parseInt(page);
+    let page: any = useURLQuery.has("page") ? useURLQuery.get("page") : 1; page = parseInt(page);
 
-    // const params: myParams = useParams();
-    // let page: number = params.page ? parseInt(params.page) : 1;
 
     const [locations] = useState(Array.from(new Set(users.map(user => user.location))));
     const [currentPage, setCurrentPage] = useState(page);

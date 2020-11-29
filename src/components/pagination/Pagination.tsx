@@ -56,16 +56,20 @@ const Pagination = (props: Params) => {
     </li>
 
     return (
-        <div className="flex d-flex align-items-center">
-            <h6 className="text-uppercase m-0 mr-2">PAGE</h6>
-            <PaginationBootstrap size="sm" className="m-0">
-                {prev}
-                {active > 3 && <PaginationBootstrap.Ellipsis />}
-                {items}
-                {active < total - 3 && <PaginationBootstrap.Ellipsis />}
-                {next}
-            </PaginationBootstrap>
-        </div>
+        <>
+            {total > 0 && <div className="flex d-flex align-items-center">
+                <h6 className="text-uppercase m-0 mr-2">PAGE</h6>
+                <PaginationBootstrap size="sm" className="m-0">
+                    {prev}
+                    {active > 3 && <PaginationBootstrap.Ellipsis />}
+                    {items}
+                    {active < total - 3 && <PaginationBootstrap.Ellipsis />}
+                    {next}
+                </PaginationBootstrap>
+            </div>}
+        </>
+
+
     )
 }
 

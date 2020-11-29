@@ -13,12 +13,15 @@ const UserList = (props: Params) => {
         <div className="mb-4" key={index}>
             <UserCard user={user}></UserCard>
         </div>
-
     ));
+
+    const error = <p className="text-center yellow">
+        UPS! We didn't find any users with this name
+    </p>
 
     return (
         <>
-            {listUser}
+            {users.length > 0 ? listUser : error}
         </>
     )
 }

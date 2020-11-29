@@ -8,9 +8,12 @@ import logo from '../../statics/img/skilldar.png';
 
 import './searchbar.scss';
 
+
 const SearchBar = (props: any) => {
+    const { onSearch } = props;
+
     const handleChange = (event: any) => {
-        props.onSearch(event.target.value);
+        onSearch(event.target.value);
     }
 
     return (
